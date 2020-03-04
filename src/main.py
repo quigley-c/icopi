@@ -8,12 +8,20 @@ import matplotlib.pyplot as plt
 import os, pathlib
 
 def load_images(data_dir):
+    """
+    Loads images from passed in dir to convert into useful input
+    """
+    
+    # image directory contains directories, each of which are 'classes'
     image_cnt = len(list(data_dir.glob('*/*.jpg')))
-    print(image_cnt)
+    print("Image count: ", image_cnt)
+
+    # Create a tf dataset for the images
+    list_ds = tf.data.Dataset.list_files(str(data_dir/'*/*'))
 #
 
 def extract_colors():
-    
+   print("Extracting colors (not really)") 
 #
 
 if __name__ == '__main__':
