@@ -40,4 +40,4 @@ if __name__ == "__main__":
     print_colors(colors)
     parts = sys.argv[1].split("/")
     fname = parts[len(parts)-1].split(".")
-    save_colors(colors, "img/palettes/"+fname[0]+".txt")
+    save_colors(colors, "img/training/palettes/"+fname[0]+".txt")
