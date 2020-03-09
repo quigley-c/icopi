@@ -28,6 +28,16 @@ def prepare_data():
     #create batches for datasets
     image_batch, label_batch = next(iter(train_ds))
 
+    #return the dataset for the estimator
+    #TODO: Auto-format data like this:
+    #features = {'image 106000 rgb:' : np.array([100, 200, 100]),
+    #            'image 106001 rgb:' : np.array([120, 135, 120]),
+    #            etc.
+    #labels = np.array([106000..107000])
+    #return features, labels
+
+    return image_batch, label_batch
+
 def load_images(data_dir):
     """
     Loads images from passed in dir to convert into useful input
