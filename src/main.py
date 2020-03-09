@@ -20,7 +20,11 @@ def load_images(data_dir):
     list_ds = tf.data.Dataset.list_files(str(data_dir/'*/*'))
 #
 
-def extract_colors():
+def train_palette_generalizer():
+    print("training palette")
+#
+
+def estimate_palette():
    print("Extracting colors (not really)") 
 #
 
