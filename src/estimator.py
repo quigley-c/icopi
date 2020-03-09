@@ -6,3 +6,12 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import os, pathlib
+
+from prepare_data import *
+
+def estimate_palettes():
+    print("estimating colors")
+#
+
+if __name__ == "__main__":
+    estimate_palettes()

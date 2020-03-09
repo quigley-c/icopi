@@ -15,7 +15,7 @@ IMG_HEIGHT = 224
 IMG_WIDTH = 224
 STEPS_PER_EPOCH = ""
 
-def main():
+def prepare_data():
 
     #TODO: properly prepare color data for dataset training
 
@@ -93,6 +93,3 @@ def prepare_for_training(ds, cache=True, shuffle_buffer_size=1000):
 
     return ds
 #
-
-if __name__ == '__main__':
-    main()
