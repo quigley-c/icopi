@@ -24,7 +24,13 @@ def estimate_palettes():
     #get dataset from prepare_data as a tf.data.Dataset
     dataset = prepare_data()
 
-    train_input_fn
+    #Make the data vars the dataset from prepare_data
+    dataset_imgs = ''
+    rgb_vals = ''
+
+    #make the input functions for training and evaluation sets
+    train_input_fn = make_input_fn(dftrain, y_train)
+    eval_input_fn = make_input_fn(dataset_imgs, rgb_vals)
 
     #set up the linear estimator for the dataset
     linear_est = tf.estimator.LinearClassifier(feature_columns=featurecolumns)
@@ -32,10 +38,19 @@ def estimate_palettes():
     result = linear_est.evaluate(eval_input_fn)
 
     clear_output()
+
+    #accuracy isn't a major concern at this point, though it should be improved further
     print(result)
 #
 
-def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True,
+def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=32):
+    def input_function():
+        ds = tf.data.Dataset.from_tensor_slices((dict(data_df), label_df))
+        if shuffle:
+            ds = ds.shuffle(1000)
+        ds = ds.batch(batch_size).repeat(num_epochs)
+        return ds
+    return input_function
 
 if __name__ == "__main__":
     estimate_palettes()
