@@ -22,7 +22,7 @@ def main():
     # Big main O_O
 
     # get annotation filepath
-    annotation_folder = '/data/training/palettes/'
+    annotation_folder = '/data/training/'
     if not os.path.exists(os.path.abspath('..') + annotation_folder):
         print("annotation directory", annotation_folder, " not found")
         sys.exit()
@@ -47,7 +47,7 @@ def main():
     for annot in annotations['annotations']:
         caption = '<start>' + annot['caption'] + ' <end>'
         image_id = annot['image_id']
-        full_path = PATH + (image_id)
+        full_path = PATH + '%012d.jpg' % (image_id)
 
         all_img_name_vector.append(full_path)
         all_captions.append(caption)
@@ -135,7 +135,7 @@ def main():
     ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=5)
 
     start_epoch = 0
-    if skpt_manager.latest_checkpoint:
+    if ckpt_manager.latest_checkpoint:
         start_epoch = int(ckpt_manager.latest_checkpoint.split('-')[-1])
         # restoring the latest checkpoint in checkpoint_path
         ckpt.restore(ckpt_manager.latest_checkpoint)
@@ -186,7 +186,7 @@ def loss_function(real, pred):
 
 
 def map_func(img_name, cap):
-    img_tensor = np.load(img_name.decode('utf-8')+'.numpy')
+    img_tensor = np.load(img_name.decode('utf-8')+'.npy')
     return img_tensor, cap
 
 
