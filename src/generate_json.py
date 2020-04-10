@@ -1,8 +1,6 @@
 import json
 import os
 
-img_id = 000000
-
 data = {}
 data['info'] = []
 data['info'].append({
@@ -23,14 +21,12 @@ for img_name in os.listdir(('..' + filepath)):
     data['images'].append({
         'license': 1,
         'file_name': img_name,
-        'id': img_id
+        'id': img_name
     })
 
-    img_id += 1
 
 data['annotations'] = []
-annot_id = img_id
-img_id = 0
+annot_id = 0
 
 filepath = '/data/training/palettes/'
 for rgb_name in os.listdir(('..' + filepath)):
@@ -43,8 +39,11 @@ for rgb_name in os.listdir(('..' + filepath)):
         entry = entry.strip()
         entry = ' '.join(entry.split())
         
+        img_name = rgb_name.split('.')
+        cur_img_id = int(img_name[0])
+
         data['annotations'].append({
-            'image_id': img_id,
+            'image_id': cur_img_id,
             'id': annot_id,
             'caption': entry
         })
@@ -52,9 +51,7 @@ for rgb_name in os.listdir(('..' + filepath)):
         annot_id += 1
 
 
-    img_id += 1
-
-filepath = '..//data/training/palettes/'
+filepath = '..//data/training/'
 writefile = 'annotations.json'
 path = filepath + writefile
 
