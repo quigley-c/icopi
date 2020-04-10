@@ -47,7 +47,7 @@ def main():
     for annot in annotations['annotations']:
         caption = '<start>' + annot['caption'] + ' <end>'
         image_id = annot['image_id']
-        full_path = PATH + '%012d.jpg' % (image_id)
+        full_path = PATH + '%d.jpg' % (image_id)
 
         all_img_name_vector.append(full_path)
         all_captions.append(caption)
