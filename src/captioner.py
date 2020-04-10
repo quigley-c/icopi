@@ -18,7 +18,7 @@ import pickle
 from models import *
 from training import *
 
-def main():
+def caption_img():
     # Big main O_O
 
     # get annotation filepath
@@ -183,7 +183,8 @@ def main():
         print ('Prediction Caption:', ' '.join(result))
         plot_attention(image, result, attention_plot)
 
-
+        # the caption is what we're interested in, since it contains the colors
+        return real_caption
 
 def plot_attention(image, result, attention_plot):
     temp_image = np.array(Image.open(image))
