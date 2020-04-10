@@ -1,3 +1,4 @@
+import cv2
 import numpy as np
 import os
 import pandas as pd
@@ -5,13 +6,27 @@ from skimage.io import imread
 
 img_path = '/data/training/bgs/'
 for img in os.listdir('..' + img_path):
-    path = '..' + img_path + img
-    image = imread(path)
+    npy_name = img + '.npy'
+    npy_path = '..' + '/data/training/npy/' + npy_name
     
-    print('image', img, ' shape:', image.shape)
+    # for convenience, don't re-generate features
+    #if os.path.isfile(npy_path):
+    #    continue
+
+    path = '..' + img_path + img
+
+    image = cv2.imread(path)
+    
+    IMG_HEIGHT = image.shape[0]
+    IMG_WIDTH = image.shape[1]
+    
+    image = cv2.resize(image, dsize=(int(IMG_HEIGHT/2),int(IMG_WIDTH/2)), interpolation=cv2.INTER_CUBIC)
 
     IMG_HEIGHT = image.shape[0]
     IMG_WIDTH = image.shape[1]
+    
+    print('image', img, ' shape:', image.shape)
+
 
     # create 2d feature matrix for image width, height
     feature_matrix = np.zeros((IMG_HEIGHT, IMG_WIDTH))  
@@ -34,8 +49,6 @@ for img in os.listdir('..' + img_path):
     features = np.reshape(feature_matrix, (IMG_HEIGHT*IMG_WIDTH))
     print("features shape:", features.shape)
 
-    npy_name = img + '.npy'
-    npy_path = '..' + '/data/training/npy/' + npy_name
     print('saving to:', npy_path)
 
     # save features to npy file
