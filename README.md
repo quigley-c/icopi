@@ -1,7 +1,4 @@
-# icopi
-Icopi or **I**mage **Co**lor **Pi**cker is a tool I came up with
-while attempting to configure my new galliumOS install with bspwm. I was
-thinking of how I should configure my colors in particular and I thought,
-"why not use my background image to inform my color choice?" The only caveat
-is that I never use the same background image for long. So I need a tool to pick
-my colors for me!
+# Image Color Picker
+The Image Color Picker is a tool that uitlizes machine learning and a little bit
+of color theory to take a user background image and use it to change the color
+scheme of the operating system running it.
